@@ -1,0 +1,95 @@
+body {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 10px;
+}
+
+/* Pacman */
+
+.pacman-field {
+  padding: 40px;
+  border: 4px dashed #f3f3f3;
+  overflow: hidden;
+}
+
+.pacman {
+  --flip: scaleX(1);
+
+  width: 0;
+  height: 0;
+  border: 50px solid yellow;
+  border-radius: 50%;
+  border-right: 50px solid transparent;
+  position: relative;
+  
+  animation: nod 1.5s ease-in-out infinite;
+}
+
+.pacman::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  background-color: black;
+  border-radius: 50%;
+  top: -25px;
+  right: -8px;
+}
+
+.pacman-field:hover .pacman {
+  animation: go-and-eat 0.5s infinite ease-in-out;
+  animation:
+    stopNodding 0.1s linear forwards,
+    rotate 0.4s linear 0.2s forwards,
+    moveBack 1s linear 1s forwards,
+    move 3s linear infinite 2s;
+  /* animation name, animation duration, animation-timing-function, animation-iteration-count, animation-delay */
+}
+
+@keyframes nod {
+  0% {
+    transform: rotate(-20deg);
+  }
+  50% {
+    transform: rotate(20deg);
+  }
+  100% {
+    transform: rotate(-20deg);
+  }
+}
+
+@keyframes stopNodding {
+  to { transform: rotateX(0); }
+}
+
+@keyframes go-and-eat {
+  0%, 100% {
+    transform: translateX(0) rotate(0deg);
+    border-right-width: 50px;
+  }
+  50% {
+    transform: translateX(50px) rotate(45deg);
+    border-right-width: 20px;
+  }
+}
+
+@keyframes rotate {
+  to {
+    --flip: scaleX(-1);
+    transform: var(--flip);
+  }
+}
+
+@keyframes moveBack {
+  0% { transform: var(--flip) translateX(0); }
+  100% {
+    transform: var(--flip) translateX(200px);
+  }
+}
+
+@keyframes move {
+  0% { transform: translateX(-100px); }
+  100% { transform: translateX(100vw); }
+}
+
