@@ -7,12 +7,6 @@ body {
 
 /* Pacman */
 
-.pacman-field {
-  padding: 40px;
-  border: 4px dashed #f3f3f3;
-  overflow: hidden;
-}
-
 .pacman {
   --flip: scaleX(1);
 
@@ -37,7 +31,7 @@ body {
   right: -8px;
 }
 
-.pacman-field:hover .pacman {
+.field:hover .pacman {
   animation: go-and-eat 0.5s infinite ease-in-out;
   animation:
     stopNodding 0.1s linear forwards,
